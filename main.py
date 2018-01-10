@@ -94,6 +94,7 @@ def seed_appointments(generator, number_of_appointments):
         customer = (Customer.select(Customer.customerId, Customer.customerName)
             .order_by(fn.Rand()).limit(1)[0])
         cityName = City.select(City.city).order_by(fn.Rand()).limit(1)[0].city
+        user = User.select(User.userId).order_by(fn.Rand()).limit(1)[0].userId
         Appointment.create(
             customerId=customer.customerId,
             title=generator.sentence(),
@@ -103,8 +104,8 @@ def seed_appointments(generator, number_of_appointments):
             url=generator.url(),
             start=start,
             end=end,
-            createdBy='admin',
-            lastUpdateBy='admin'
+            createdBy=user,
+            lastUpdateBy=user
         )
         start = start + datetime.timedelta(hours=1)
         end = end + datetime.timedelta(hours=1)

@@ -12,17 +12,17 @@ All tables are loaded except for:
 According to the FAQ document provided by Course Mentors, `reminder` and
 `incrementtypes` aren't _needed_ to complete the project. The `user` table
 is intentionally left out in order to let students figure out how they want
-to load it, and what user records they would like in it.
+to load it, and what user records they would like in it. You'll need to add
+at least 1 user to the `user`s table in order for this script to work properly.
 
 ## Requirements
 
-In order to run this script on your machine, you'll need the following
-installed on your machine:
+In order to run this on your machine, you'll need the following installed:
 
 * Python (this program was written/tested using Python 3.6.1), and
 * Pip3, the package manager for Python 3
 
-In order to install the necessary dependencies for the program, enter the
+To install the necessary dependencies for the program, enter the
 following in your terminal:
 
 ```bash
