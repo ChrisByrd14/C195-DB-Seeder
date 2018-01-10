@@ -29,6 +29,8 @@ following in your terminal:
 $ pip install -r requirements.txt
 ```
 
+It is also **required** that you update your tables so that the primary keys auto-increment.
+
 ## Before Running the Program
 
 Go into [settings.py](/settings.py) and set the database connection info and how many of each
