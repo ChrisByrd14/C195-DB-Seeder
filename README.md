@@ -23,6 +23,6 @@ at least 1 user to the `user`s table in order for this script to work properly.
 4. Open a a terminal and navigate to where you cloned this repo
 5. Enter `pip3 install -r requirements.txt` to install dependencies
 6. Go into [settings.py](/settings.py) and
-  * set the DB connection info
-  * set the desired number of records for each table
+   * set the DB connection info
+   * set the desired number of records for each table
 7. Enter `python3 main.py` and wait for the script to complete
