@@ -31,5 +31,5 @@ $ pip install -r requirements.txt
 
 ## Before Running the Program
 
-Go into `setings.py` and set the database connection info and how many of each
+Go into [settings.py](/settings.py) and set the database connection info and how many of each
 type of record you would like.
