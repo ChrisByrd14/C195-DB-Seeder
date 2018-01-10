@@ -39,11 +39,12 @@ def seed_countries():
 def seed_cities(generator, number_of_cities):
     for _ in range(0, number_of_cities):
         result = Country.select(Country.countryId).order_by(fn.Rand()).limit(1)
+        user = random_user()
         City.create(
             city=generator.city(),
             countryId=result[0].countryId,
-            createdBy='admin',
-            lastUpdateBy='admin',
+            createdBy=user,
+            lastUpdateBy=user,
         )
 
 
@@ -62,14 +63,15 @@ def seed_addresses(generator, number_of_addresses):
 
         result = City.select(City.cityId).order_by(fn.Rand()).limit(1)
         city = result[0].cityId
+        user = random_user()
         Address.create(
             address=address1,
             address2=address2,
             cityId=city,
             postalCode=zipcode,
             phone=generator.phone_number(),
-            createdBy='admin',
-            lastUpdateBy='admin'
+            createdBy=user,
+            lastUpdateBy=user
         )
 
 
@@ -78,12 +80,13 @@ def seed_customers(generator, number_of_customers):
         result = Address.select(Address.addressId).order_by(fn.Rand()).limit(1)
         address = result[0].addressId
         active = random.choice([0, 1])
+        user = random_user()
         Customer.create(
             customerName=generator.name(),
             addressId=address,
             active=active,
-            createdBy='admin',
-            lastUpdateBy='admin'
+            createdBy=user,
+            lastUpdateBy=user
         )
 
 
@@ -94,7 +97,7 @@ def seed_appointments(generator, number_of_appointments):
         customer = (Customer.select(Customer.customerId, Customer.customerName)
             .order_by(fn.Rand()).limit(1)[0])
         cityName = City.select(City.city).order_by(fn.Rand()).limit(1)[0].city
-        user = User.select(User.userId).order_by(fn.Rand()).limit(1)[0].userId
+        user = random_user()
         Appointment.create(
             customerId=customer.customerId,
             title=generator.sentence(),
@@ -111,7 +114,11 @@ def seed_appointments(generator, number_of_appointments):
         end = end + datetime.timedelta(hours=1)
 
 
+def random_user():
+    return User.select(User.userId).order_by(fn.Rand()).limit(1)[0].userId
+
+
 if __name__ == '__main__':
-    print(datetime.datetime.now())
+    print("Started:", datetime.datetime.now())
     main(settings)
-    print(datetime.datetime.now())
+    print("Finished:", datetime.datetime.now())
