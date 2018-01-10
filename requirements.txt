@@ -1,0 +1,6 @@
+Faker==0.8.8
+peewee==2.10.2
+PyMySQL==0.8.0
+python-dateutil==2.6.1
+six==1.11.0
+text-unidecode==1.1
