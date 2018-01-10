@@ -1,6 +1,3 @@
-"""
-"""
-
 import datetime
 from .mysqlmodel import MySQLModel
 from peewee import *

@@ -1,4 +1,5 @@
 """
+Base model for the Peewee ORM
 """
 
 from peewee import *

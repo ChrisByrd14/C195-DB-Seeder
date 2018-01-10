@@ -1,6 +1,3 @@
-"""
-"""
-
 from .address import Address
 import datetime
 from .mysqlmodel import MySQLModel

@@ -1,5 +1,7 @@
 #!/usr/local/bin/python3.6
 """
+This program uses the Faker module to generate data for
+populating the database tables for C195 - Software II.
 """
 
 from database import *
