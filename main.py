@@ -26,13 +26,13 @@ def seed_countries():
     """ two countries are required """
     Country.create(
         country="United States",
-        createdBy="admin",
-        lastUpdateBy="admin"
+        createdBy="1",
+        lastUpdateBy="1"
     )
     Country.create(
         country="Mexico",
-        createdBy="admin",
-        lastUpdateBy="admin"
+        createdBy="1",
+        lastUpdateBy="1"
     )
 
 
@@ -91,13 +91,35 @@ def seed_customers(generator, number_of_customers):
 
 
 def seed_appointments(generator, number_of_appointments):
+    utc_convert = datetime.timedelta(hours=settings.UTC_OFFSET)
     start = datetime.datetime.now()
+    start = start.replace(hour=8, minute=0, second=0, microsecond=0)
     end = start + datetime.timedelta(minutes=15)
+
     for _ in range(0, number_of_appointments):
         customer = (Customer.select(Customer.customerId, Customer.customerName)
             .order_by(fn.Rand()).limit(1)[0])
         cityName = City.select(City.city).order_by(fn.Rand()).limit(1)[0].city
         user = random_user()
+
+        if start.hour > 16:
+            # don't schedule appointments after 5pm, set hours to 8am
+            start = start.replace(hour=8)
+            start += datetime.timedelta(days=1)
+            end = end.replace(hour=8, minute=15)
+            end += datetime.timedelta(days=1)
+
+        skip_period = 0
+        # if meeting start time on weekend, set start to the following monday
+        if start.weekday() == 5:
+            skip_period = 2
+        elif start.weekday() == 6:
+            skip_period = 1
+
+        skip_weekend = datetime.timedelta(days=skip_period)
+        start += skip_weekend
+        end += skip_weekend
+
         Appointment.create(
             customerId=customer.customerId,
             title=generator.sentence(),
@@ -105,8 +127,8 @@ def seed_appointments(generator, number_of_appointments):
             location=cityName,
             contact=customer.customerName,
             url=generator.url(),
-            start=start,
-            end=end,
+            start=start - utc_convert,
+            end=end - utc_convert,
             createdBy=user,
             lastUpdateBy=user
         )

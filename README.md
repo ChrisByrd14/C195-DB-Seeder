@@ -25,4 +25,5 @@ at least 1 user to the `user`s table in order for this script to work properly.
 6. Go into [settings.py](/settings.py) and
    * set the DB connection info
    * set the desired number of records for each table
+   * set the UTC offset for your timezone. [Here is a list of UTC offsets](https://en.wikipedia.org/wiki/List_of_UTC_time_offsets).
 7. Enter `python3 main.py` and wait for the script to complete
